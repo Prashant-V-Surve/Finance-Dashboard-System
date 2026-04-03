@@ -47,7 +47,7 @@ public class UserService {
 
     public UserResponse updateUser( Long id ,UserRequest request){
 
-        User existingClient = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User with id " + id + " not found!"));
+        User existingClient = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found!"));
 
         //UPDATING THE FIELDS MANUALLY
         existingClient.setName(request.getUsername());
@@ -65,7 +65,7 @@ public class UserService {
 
     public UserResponse deleteUser(Long id){
 
-        User exsistingClient = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User with id " + id + " not found!"));
+        User exsistingClient = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found!"));
 
         userRepository.delete(exsistingClient);
 
