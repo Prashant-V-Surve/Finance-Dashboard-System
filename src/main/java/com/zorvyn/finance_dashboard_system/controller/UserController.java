@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
@@ -21,16 +23,29 @@ public class UserController {
 
     // C : Create (POST)
     @PostMapping
-    public UserResponse createUser(@Valid@RequestBody UserRequest userRequest){
+    public ResponseEntity<UserResponse> createUser(@Valid@RequestBody UserRequest userRequest){
 
-        return userService.createUser(userRequest).getBody();
+        return ResponseEntity.status(201).body(userService.createUser(userRequest));
 
     }
 
-    public UserResponse getUserById(@RequestParam long id)
+    @GetMapping
+    public ResponseEntity<List<UserResponse>> getAllUsers()
     {
+        return ResponseEntity.status(200).body(userService.getAllUsers());
+    }
+
+    @GetMapping("id/{userId}")
+    public ResponseEntity<UserResponse> getUserById(@PathVariable Long userId){
+        return ResponseEntity.status(200).body(userService.getUserById(userId));
+    }
+
+
+    @PutMapping
+    public ResponseEntity<UserResponse> updateUser(@Valid@RequestBody UserRequest request){
 
     }
+
 
 
 }

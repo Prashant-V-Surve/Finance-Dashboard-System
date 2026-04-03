@@ -10,4 +10,6 @@ public class FinanceDashboardSystemApplication {
 		SpringApplication.run(FinanceDashboardSystemApplication.class, args);
 	}
 
+
 }
+
