@@ -3,15 +3,11 @@ package com.zorvyn.finance_dashboard_system.service;
 import com.zorvyn.finance_dashboard_system.dto.request.UserRequest;
 import com.zorvyn.finance_dashboard_system.dto.response.UserResponse;
 import com.zorvyn.finance_dashboard_system.entity.User;
+import com.zorvyn.finance_dashboard_system.exception.ResourceNotFoundException;
 import com.zorvyn.finance_dashboard_system.mapper.UserMapper;
 import com.zorvyn.finance_dashboard_system.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -39,7 +35,6 @@ public class UserService {
     }
 
     public List<UserResponse> getAllUsers() {
-
         return userRepository.findAll()
                 .stream()
                 .map(userMapper::toResponse)
@@ -47,15 +42,33 @@ public class UserService {
     }
 
     public UserResponse getUserById(Long id) {
-        return userMapper.toResponse(userRepository.findById(id).orElseThrow(() -> new RuntimeException("User with id " + id + " not found!")));
+        return userMapper.toResponse(userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found!")));
     }
 
     public UserResponse updateUser( Long id ,UserRequest request){
 
         User existingClient = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User with id " + id + " not found!"));
 
-        existingClient = userRepository.save(existingClient);
+        //UPDATING THE FIELDS MANUALLY
+        existingClient.setName(request.getUsername());
+        existingClient.setEmail(request.getUsername());
+        existingClient.setPassword(request.getPassword());
+        existingClient.setRoleType(request.getRole());
 
-        return userMapper.toResponse(existingClient);
+        // SAVE UPDATED DATA
+
+        User savedUser = userRepository.save(existingClient);
+
+
+        return userMapper.toResponse(savedUser);
+    }
+
+    public UserResponse deleteUser(Long id){
+
+        User exsistingClient = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User with id " + id + " not found!"));
+
+        userRepository.delete(exsistingClient);
+
+        return userMapper.toResponse(exsistingClient);
     }
 }
