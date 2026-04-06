@@ -10,15 +10,15 @@ import lombok.Data;
 public class UserRequest {
 
     @NotBlank(message = "Please Insert Your Username !")
-    private String username;
+    private String name;
 
     @Email(message = "Invalid Email")
     @NotBlank(message = "Please Insert Your Email-ID !")
-    private String emailId;
+    private String email;
 
     @NotBlank(message = "Password is required for Authentification !")
     private String password;
 
     @NotNull(message = "Please Enter Your Role !")
-    private RoleType role;
+    private RoleType roleType;
 }

@@ -23,7 +23,7 @@ public class User {
     public String password;
 
     @Enumerated(EnumType.STRING)
-    public RoleType RoleType;
+    public RoleType roleType;
 
     public boolean active = true;
 

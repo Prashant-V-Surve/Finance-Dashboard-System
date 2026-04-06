@@ -50,10 +50,10 @@ public class UserService {
         User existingClient = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found!"));
 
         //UPDATING THE FIELDS MANUALLY
-        existingClient.setName(request.getUsername());
-        existingClient.setEmail(request.getUsername());
+        existingClient.setName(request.getName());
+        existingClient.setEmail(request.getEmail());
         existingClient.setPassword(request.getPassword());
-        existingClient.setRoleType(request.getRole());
+        existingClient.setRoleType(request.getRoleType());
 
         // SAVE UPDATED DATA
 

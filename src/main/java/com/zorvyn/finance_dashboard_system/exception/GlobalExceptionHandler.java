@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler extends RuntimeException {
+public class GlobalExceptionHandler {
 
     //Handle ResourceNotFound
     @ExceptionHandler(ResourceNotFoundException.class)
@@ -34,4 +34,6 @@ public class GlobalExceptionHandler extends RuntimeException {
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
+
+
 }

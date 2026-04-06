@@ -59,10 +59,14 @@ public class UserController {
         UserResponse clientResponse = userService.deleteUser(userId);
 
         if (clientResponse != null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(clientResponse);
+            return ResponseEntity.status(HttpStatus.OK).body(clientResponse);
         }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+
+
+
 
 
 }
