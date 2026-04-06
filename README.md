@@ -131,6 +131,8 @@ API will run at : 'http://localhost:8080
 
 API starts at: http://localhost:8080
 
+Note : While Using commands for either maven or jar file you should go to the directory where maven.cmd and jar file is present respectively or provide path in command.
+
 ---
 
 ### Roles and Permission
