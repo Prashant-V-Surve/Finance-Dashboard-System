@@ -121,7 +121,7 @@ API will run at : 'http://localhost:8080
 ### Option 2 — Run with JAR (Quick Start)
 
 ###1. Make sure MySQL is running and database is created:
-   finance_dashboard
+   finance_dashboard 
 
 ###2. Build the JAR:
    mvn clean package -DskipTests
